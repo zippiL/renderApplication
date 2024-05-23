@@ -13,7 +13,11 @@ const renderApiKey = 'rnd_psicWurWzAv0UktCJEC8MPliiDEY';
 app.get('/', async (req, res) => {
     sdk.auth(renderApiKey);
 sdk.getServices({limit: '20'})
-  .then(({ data }) => res.json(data))
+//   .then(({ data }) => res.json(data))
+.then(({ data }) => {
+    const names = data.map(service => service.service.name);
+    res.json(names);
+})
   .catch(err => console.error(err));
 })
 
